@@ -12,16 +12,23 @@ app = Dash(__name__)
 # ------------------ Layout ------------------
 app.layout = html.Div(
     style={
-        "backgroundColor": "#1e1e1e",
-        "padding": "30px",
+        "background": "linear-gradient(-45deg, #1e1e1e, #2b1055, #0f2027, #203a43)",
+        "backgroundSize": "400% 400%",
+        "animation": "gradientBG 15s ease infinite",
+        "minHeight": "100vh",
+        "padding": "40px",
         "fontFamily": "Arial"
     },
     children=[
         html.H1(
             "Soul Foods Sales Dashboard",
             style={
+                "letter-spacing": "5px",
                 "textAlign": "center",
-                "color": "#ff6ec7"
+                "color": "#3de281",
+                "textShadow": "0 0 20px #3de281, 0 0 20px #3de281",
+                "marginBottom": "30px",
+                "animation": "fadeInUp 1s ease"
             }
         ),
 
@@ -29,31 +36,45 @@ app.layout = html.Div(
         html.Div(
             style={"textAlign": "center", "marginBottom": "20px"},
             children=[
-                dcc.RadioItems(
-                    id="region-filter",
-                    options=[
-                        {"label": " All", "value": "all"},
-                        {"label": " North", "value": "north"},
-                        {"label": " East", "value": "east"},
-                        {"label": " South", "value": "south"},
-                        {"label": " West", "value": "west"},
-                    ],
-                    value="all",
-                    inline=True,
-                    labelStyle={
-                        "color": "white",
-                        "marginRight": "20px"
-                    }
+                html.Div(
+                    className="region-bar",
+                    children=[
+                        dcc.RadioItems(
+                            id="region-filter",
+                            options=[
+                                {"label": "ALL", "value": "all"},
+                                {"label": "NORTH", "value": "north"},
+                                {"label": "EAST", "value": "east"},
+                                {"label": "SOUTH", "value": "south"},
+                                {"label": "WEST", "value": "west"},
+                            ],
+                            value="all",
+                            inputClassName="region-radio",
+                            labelClassName="region-label"
+                        )
+                    ]
                 )
             ]
         ),
 
-        dcc.Graph(
-            id="sales-graph",
-            # animate=True,  # 👈 Important
-            config={
-                "displayModeBar": True,
-                "modeBarButtonsToRemove": ["select2d", "lasso2d"]
+        html.Div(
+            className="glass-card",
+            children=[
+                dcc.Graph(
+                    id="sales-graph",
+                    config={
+                        "displayModeBar": True,
+                        "modeBarButtonsToRemove": ["select2d", "lasso2d"]
+                    }
+                )
+            ],
+            style={
+                "background": "rgba(255, 255, 255, 0.05)",
+                "backdropFilter": "blur(15px)",
+                "borderRadius": "20px",
+                "padding": "20px",
+                "boxShadow": "0 8px 32px rgba(0, 0, 0, 0.37)",
+                "border": "1px solid rgba(255, 255, 255, 0.18)"
             }
         )
     ]
@@ -133,8 +154,8 @@ def update_graph(selected_region):
     fig.update_layout(
         title="Pink Morsel Sales Trend",
         title_x=0.5,
-        paper_bgcolor="#1e1e1e",
-        plot_bgcolor="#2a2a2a",
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
         font=dict(color="white"),
         xaxis_title="Date",
         yaxis_title="Total Sales ($)",
@@ -154,6 +175,14 @@ def update_graph(selected_region):
         transition=dict(
             duration=600,
             easing="cubic-in-out"
+        ),
+        xaxis=dict(
+            showgrid=True,
+            gridcolor="rgba(255,255,255,0.1)"
+        ),
+        yaxis=dict(
+            showgrid=True,
+            gridcolor="rgba(255,255,255,0.1)"
         )
     )
 
