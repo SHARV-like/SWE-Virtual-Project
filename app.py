@@ -75,7 +75,7 @@ fig.update_layout(
     xaxis_title="Date",
     yaxis_title="Total Sales ($)",
     hovermode="x unified",
-    height=580,   # Increased vertical space
+    height=600,   # Increased vertical space
     legend=dict(
     bgcolor="#2a2a1a",
     bordercolor="white",
@@ -85,6 +85,11 @@ fig.update_layout(
     y=0.1
     )
 )
+config={
+    "displayModeBar": True,
+    "modeBarButtonsToAdd": ["resetScale2d"],
+    "modeBarButtonsToRemove": ["select2d", "lasso2d"]
+}
 fig.update_yaxes(range=[6000, 9500])
 # Dash app
 app = Dash(__name__)
