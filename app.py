@@ -24,7 +24,7 @@ fig.add_trace(
             shape="spline"
         ),
         marker=dict(
-            size=10,
+            size=5,
             color="#ff6ec7",
             line=dict(width=1, color="white")
         )
@@ -83,6 +83,18 @@ fig.update_layout(
     font=dict(color="white"),
     x=0.01,
     y=0.1
+    )
+)
+fig.update_layout(
+    legend=dict(
+        x=0.98,
+        y=0.98,
+        xanchor="right",
+        yanchor="top",
+        bgcolor="#2a2a1a",
+        bordercolor="white",
+        borderwidth=1,
+        font=dict(color="white")
     )
 )
 config={
