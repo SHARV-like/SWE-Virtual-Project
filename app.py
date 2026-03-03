@@ -17,17 +17,38 @@ fig.add_trace(
         x=df_daily["Date"],
         y=df_daily["Sales"],
         mode="lines+markers",
+        name="Total Sales",   # 👈 This adds legend
         line=dict(
-            color="#00e676",  # Bright green
+            color="#00e676",
             width=3,
             shape="spline"
         ),
         marker=dict(
-            size=8,
-            color="#ff6ec7",  # Pinkish dots
+            size=10,
+            color="#ff6ec7",
             line=dict(width=1, color="white")
-        ),
-        hovertemplate="<b>Date:</b> %{x}<br><b>Sales:</b> $%{y:,.2f}<extra></extra>"
+        )
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        x=["2021-01-15", "2021-01-15"],
+        y=[df_daily["Sales"].min(), df_daily["Sales"].max()],
+        mode="lines",
+        name="Price Increase (15 Jan 2021)",
+        line=dict(color="red", dash="dash", width=2)
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        x=df_daily["Date"],
+        y=df_daily["Sales"],
+        mode="lines",
+        line=dict(color="#00e676", width=8),
+        opacity=0.15,
+        showlegend=False
     )
 )
 
@@ -48,14 +69,23 @@ fig.add_vline(
 fig.update_layout(
     title="Pink Morsel Sales Trend",
     title_x=0.5,
-    paper_bgcolor="#1e1e1e",     # Outside graph background
-    plot_bgcolor="#2a2a2a",      # Plot area background
+    paper_bgcolor="#1e1e1e",
+    plot_bgcolor="#2a2a2a",
     font=dict(color="white"),
     xaxis_title="Date",
     yaxis_title="Total Sales ($)",
-    hovermode="x unified"
+    hovermode="x unified",
+    height=580,   # Increased vertical space
+    legend=dict(
+    bgcolor="#2a2a1a",
+    bordercolor="white",
+    borderwidth=1,
+    font=dict(color="white"),
+    x=0.01,
+    y=0.1
+    )
 )
-
+fig.update_yaxes(range=[6000, 9500])
 # Dash app
 app = Dash(__name__)
 
