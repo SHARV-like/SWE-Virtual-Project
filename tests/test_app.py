@@ -8,7 +8,7 @@ def app():
     return import_app("app")  # make sure your file is app.py
 
 
-# 1️⃣ Test Header Presence
+# Test Header Presence
 def test_header_present(dash_duo, app):
     dash_duo.start_server(app)
 
@@ -17,7 +17,7 @@ def test_header_present(dash_duo, app):
     assert "Soul Foods Sales Dashboard" in header.text
 
 
-# 2️⃣ Test Graph Presence
+# Test Graph Presence
 def test_graph_present(dash_duo, app):
     dash_duo.start_server(app)
 
@@ -25,7 +25,7 @@ def test_graph_present(dash_duo, app):
     assert graph is not None
 
 
-# 3️⃣ Test Region Picker Presence
+# Test Region Picker Presence
 def test_region_picker_present(dash_duo, app):
     dash_duo.start_server(app)
 

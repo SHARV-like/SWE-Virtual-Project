@@ -146,7 +146,7 @@ def update_graph(selected_region):
         )
     )
 
-    # 🔥 IMPORTANT: Enable Auto Centering
+    # Enable Auto Centering
     # fig.update_xaxes(autorange=True)
     # fig.update_yaxes(autorange=True)
 
